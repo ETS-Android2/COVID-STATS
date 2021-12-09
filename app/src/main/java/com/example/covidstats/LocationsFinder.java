@@ -29,9 +29,10 @@ public class LocationsFinder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_locations_finder);
         // To Hide App Title Bar
         getSupportActionBar().hide();
+        setContentView(R.layout.activity_locations_finder);
+
         countrySearchET = findViewById(R.id.countrySearchET);
         submitButton = findViewById(R.id.submitButton);
 
@@ -49,12 +50,14 @@ public class LocationsFinder extends AppCompatActivity {
                         for(int i = 0 ; i < stats.length(); i++){
                             JSONObject jsonObject = stats.getJSONObject(i);
                             if(jsonObject.getString("Country").toLowerCase().equals(countrySearchET.getText().toString().trim().toLowerCase())){
+                                String country = jsonObject.getString("Country");
                                 int cases = jsonObject.getInt("NewConfirmed");
                                 int recovered = jsonObject.getInt("NewRecovered");
                                 int deaths = jsonObject.getInt("NewDeaths");
                                 int active = jsonObject.getInt("TotalConfirmed");
                                 System.out.println(deaths + cases + recovered);
                                 Intent intent = new Intent();
+                                intent.putExtra("country",country);
                                 intent.putExtra("active",active);
                                 intent.putExtra("todayRecovered",recovered);
                                 intent.putExtra("todayDeaths",deaths);

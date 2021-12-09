@@ -5,4 +5,11 @@
     <string name="_67">67</string>
     <string name="recovered">Recovered</string>
     <string name="deaths">Deaths</string>
+    <string name="_na">N/A</string>
+    <string name="active">Active</string>
+    <string name="date">DATE</string>
+    <string name="n_a">N/A</string>
+    <string name="search">Search</string>
+    <string name="country">Country</string>
+    <string name="todo">TODO</string>
 </resources>
