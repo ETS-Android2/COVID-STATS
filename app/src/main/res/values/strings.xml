@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">covidStats</string>
+    <string name="worldwide">Worldwide</string>
+    <string name="cases">Cases</string>
+    <string name="_67">67</string>
+    <string name="recovered">Recovered</string>
+    <string name="deaths">Deaths</string>
 </resources>
