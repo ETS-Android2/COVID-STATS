@@ -1,12 +1,14 @@
 package com.example.covidstats;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +22,8 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     private TextView worldCases, worldRecovered, worldDeaths, worldActive;
+    private static int LOCATIONS_CODE = 3;
+    private Button searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,15 @@ public class MainActivity extends AppCompatActivity {
         worldRecovered = findViewById(R.id.worldRecovered);
         worldDeaths = findViewById(R.id.worldDeaths);
         worldActive = findViewById(R.id.worldActive);
+        searchButton = findViewById(R.id.searchButton);
 
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),LocationsFinder.class);
+                startActivityForResult(intent,LOCATIONS_CODE);
+            }
+        });
 
         String url = "https://corona.lmao.ninja/v2/all";
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
@@ -63,6 +75,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         queue.add(jsonObjectRequest);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == LOCATIONS_CODE){
+            int cases = data.getIntExtra("todayCases",0);
+            int recovered = data.getIntExtra("todayRecovered",0);
+            int deaths = data.getIntExtra("todayDeaths",0);
+            int active = data.getIntExtra("active",0);
+
+            worldCases.setText(String.valueOf(cases));
+            worldRecovered.setText(String.valueOf(recovered));
+            worldDeaths.setText(String.valueOf(deaths));
+            worldActive.setText(String.valueOf(active));
+        }
     }
 
 
