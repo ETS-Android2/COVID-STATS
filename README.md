@@ -7,3 +7,7 @@
 
 
 And you're ready to start working on your new app.
+
+
+# Preview
+![demo](preview.gif)
